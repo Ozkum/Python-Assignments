@@ -1,0 +1,193 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "20 Mart 2022 Ek Adam Asmaca.ipynb",
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "source": [
+        "import random, string"
+      ],
+      "metadata": {
+        "id": "XjyJd4ROzl7s"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def hengman():\n",
+        "  words = [\"CROW\", \"OWL\", \"EAGLE\", \"PIGEON\", \"SWALLOW\", \"FALCON\", \"PARROT\", \"SPARROW\", \"SWAN\", \"FLAMINGO\", \"PELICAN\"]\n",
+        "  word = random.choice(words)\n",
+        "  word_letters = set(word)\n",
+        "  alphabet = set(string.ascii_uppercase)\n",
+        "  used_letters = set()\n",
+        "  chance = 10\n",
+        "\n",
+        "  while len(word_letters) > 0 and chance > 0:\n",
+        "    print(\"You have used these words: \", \" \".join(used_letters))\n",
+        "    print(f\"You have {chance} chances!\")\n",
+        "\n",
+        "    word_list = [letter if letter in used_letters else \"-\" for letter in word]\n",
+        "    print(\"Current word: \", \" \".join(word_list))\n",
+        "#    for i in word:\n",
+        "#      if i in used_letters:\n",
+        "#        print(i)\n",
+        "#      else:\n",
+        "#        print(\"_\")\n",
+        "\n",
+        "    user_letter = input(\"Write a letter: \").upper().strip()\n",
+        "    if user_letter in (alphabet - used_letters):\n",
+        "      used_letters.add(user_letter)\n",
+        "      if used_letters in word_letters:\n",
+        "        word_letters.remove(user_letter)\n",
+        "      else:\n",
+        "        chance -=1\n",
+        "    elif user_letter in used_letters:\n",
+        "      print(\"You have already used this letter...\")\n",
+        "    else:\n",
+        "      print(\"ınvalid character...\")\n",
+        "  if chance == 0:\n",
+        "      print(f\"You failed.. The word was {word}\")\n",
+        "  else:\n",
+        "      print(f\"Kazandınız Saklı kelime {word}\")\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "-ZTcxkbazosr"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"welcome to hangman game. You should guess a bird species. Good luck!\")\n",
+        "hengman()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BFM72d5N7ztU",
+        "outputId": "d9766636-f083-473a-f600-862b7bd357bc"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "welcome to hangman game. You should guess a bird species. Good luck!\n",
+            "You have used these words:  \n",
+            "You have 10 chances!\n",
+            "Current word:  - - - - - - - -\n",
+            "Write a letter: b\n",
+            "You have used these words:  B\n",
+            "You have 9 chances!\n",
+            "Current word:  - - - - - - - -\n",
+            "Write a letter: k\n",
+            "You have used these words:  B K\n",
+            "You have 8 chances!\n",
+            "Current word:  - - - - - - - -\n",
+            "Write a letter: r\n",
+            "You have used these words:  B R K\n",
+            "You have 7 chances!\n",
+            "Current word:  - - - - - - - -\n",
+            "Write a letter: n\n",
+            "You have used these words:  B R N K\n",
+            "You have 6 chances!\n",
+            "Current word:  - - - - - N - -\n",
+            "Write a letter: f\n",
+            "You have used these words:  K N R F B\n",
+            "You have 5 chances!\n",
+            "Current word:  F - - - - N - -\n",
+            "Write a letter: l\n",
+            "You have used these words:  L K N R F B\n",
+            "You have 4 chances!\n",
+            "Current word:  F L - - - N - -\n",
+            "Write a letter: a\n",
+            "You have used these words:  L A K N R F B\n",
+            "You have 3 chances!\n",
+            "Current word:  F L A - - N - -\n",
+            "Write a letter: m\n",
+            "You have used these words:  L A M K N R F B\n",
+            "You have 2 chances!\n",
+            "Current word:  F L A M - N - -\n",
+            "Write a letter: g\n",
+            "You have used these words:  L A M G K N R F B\n",
+            "You have 1 chances!\n",
+            "Current word:  F L A M - N G -\n",
+            "Write a letter: o\n",
+            "You failed.. The word was FLAMINGO\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random, string\n",
+        "\n",
+        "\n",
+        "def hangman():\n",
+        "    words = [\"CROW\", \"OWL\", \"EAGLE\", \"PIGEON\", \"SWALLOW\", \"FALCON\", \"PARROT\",\n",
+        "             \"SPARROW\", \"SWAN\", \"FLAMINGO\", \"PELICAN\"]\n",
+        "\n",
+        "    word = random.choice(words)\n",
+        "    word_letters = set(word)\n",
+        "    alphabet = set(string.ascii_uppercase)\n",
+        "    used_letters = set()\n",
+        "    chance = 10\n",
+        "\n",
+        "    while len(word_letters) > 0 and chance > 0:\n",
+        "        print(\"You have used these words: \", \" \".join(used_letters))\n",
+        "        print(f\"You have {chance} chances!\")\n",
+        "\n",
+        "        word_list = [letter if letter in used_letters else \"-\" for letter in word]\n",
+        "        print(\"Current word: \", \" \".join(word_list))\n",
+        "\n",
+        "        user_letter = input(\"Write a letter: \").upper().strip()\n",
+        "        if user_letter in (alphabet - used_letters):\n",
+        "            used_letters.add(user_letter)\n",
+        "            if user_letter in word_letters:\n",
+        "                word_letters.remove(user_letter)\n",
+        "            else:\n",
+        "                chance -= 1\n",
+        "        elif user_letter in used_letters:\n",
+        "            print(\"You have already used this letter...\")\n",
+        "        else:\n",
+        "            print(\"Invalid character...\")\n",
+        "    if chance == 0:\n",
+        "        print(f\"You failed.. The word was {word}\")\n",
+        "    else:\n",
+        "        print(f\"Congrats... You won.. The word was {word}\")\n",
+        "\n",
+        "\n",
+        "print(\"Welcome to hangman game. You should guess a bird species. Good Luck!!1\")\n",
+        "hangman()"
+      ],
+      "metadata": {
+        "id": "8Q0LFyRaFbsz"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
